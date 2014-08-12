@@ -65,7 +65,7 @@ class ModsDisplay::Name < ModsDisplay::Field
     output = ""
     output << [unqualified_name_parts(element),
                qualified_name_parts(element, "family"),
-               qualified_name_parts(element, "given")].flatten.compact.join(", ")
+               qualified_name_parts(element, "given")].flatten.compact.reject(&:empty?).join(", ")
     terms = qualified_name_parts(element, "termsOfAddress") 
     unless terms.empty?
       term_delimiter = ", "
