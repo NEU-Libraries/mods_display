@@ -46,7 +46,7 @@ class ModsDisplay::Configuration
   end
 
   def abstract &abstract
-    @abstract ||= ModsDisplay::Configuration::Base.new(&abstract || Proc.new{})
+    @abstract ||= ModsDisplay::Configuration::Abstract.new(&abstract || Proc.new{})
   end
 
   def contents &contents
