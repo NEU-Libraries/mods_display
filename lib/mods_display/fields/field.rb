@@ -33,6 +33,17 @@ class ModsDisplay::Field
     end
     output
   end
+  
+  def to_hash
+    return nil if fields.empty? or @config.ignore?
+    hsh = Hash.new
+    fields.each do |field|
+      if field.values.any?{|f| f && !f.empty? }
+        hsh["#{sanitized_field_title(field.label)}"] = field.values
+      end
+    end
+    return hsh
+  end
 
   private
 
