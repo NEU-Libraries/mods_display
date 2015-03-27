@@ -50,7 +50,7 @@ class ModsDisplay::HTML
         output.merge!(field.to_hash)
       end
     end
-    return output
+    return output.to_json
   end
   
   def method_missing(method_name, *args, &block)
