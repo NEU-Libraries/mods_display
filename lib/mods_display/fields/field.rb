@@ -35,10 +35,10 @@ class ModsDisplay::Field
   end
   
   def to_hash
-    return nil if fields.empty? or @config.ignore?
+    return nil if fields.blank? or @config.ignore?
     hsh = Hash.new
     fields.each do |field|
-      if field.values.any?{|f| f && !f.empty? }
+      if field.values.any?{|f| f && !f.blank? }
         hsh["#{sanitized_field_title(field.label)}"] = field.values
       end
     end
