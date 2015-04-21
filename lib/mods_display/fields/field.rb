@@ -76,7 +76,7 @@ class ModsDisplay::Field
     "title='#{label.gsub(/:$/,'').strip}'"
   end
   
-  def sanitize_field(label)
+  def sanitized_field(label)
     '#{label.gsub(/:$/,'').strip}'
   end
 
