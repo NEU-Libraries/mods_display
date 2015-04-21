@@ -39,7 +39,7 @@ class ModsDisplay::Field
     hsh = Hash.new
     fields.each do |field|
       if field.values.any?{|f| f && !f.blank? }
-        hsh["#{sanitized_field_title(field.label)}"] = field.values
+        hsh["#{sanitized_field(field.label)}"] = field.values
       end
     end
     return hsh
@@ -74,6 +74,10 @@ class ModsDisplay::Field
 
   def sanitized_field_title(label)
     "title='#{label.gsub(/:$/,'').strip}'"
+  end
+  
+  def sanitize_field(label)
+    '#{label.gsub(/:$/,'').strip}'
   end
 
   def replace_tokens(object, value)
