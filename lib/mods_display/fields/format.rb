@@ -32,7 +32,7 @@ class ModsDisplay::Format < ModsDisplay::Field
        !@values.format.empty?
          vals << raw_formats(@values.format).join(", ")
     end
-    hsh["#{format_label}"] = vals
+    hsh["#{sanitized_field(format_label)}"] = vals
     return hsh
   end
 
