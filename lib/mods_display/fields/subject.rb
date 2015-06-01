@@ -71,6 +71,47 @@ class ModsDisplay::Subject < ModsDisplay::Field
     end
     output
   end
+  
+  def to_hash
+    output = Hash.new
+    return nil if fields.empty? or @config.ignore?
+    fields.each do |field|
+      subs = []
+      field.values.each do |subjects|
+        buffer = []
+        sub_parts = []
+        subjects.each do |val|
+          if val.is_a?(ModsDisplay::Name::Person)
+            buffer << val.name
+          else
+            buffer << val
+          end
+          if @config.link and @config.hierarchical_link
+            if val.is_a?(ModsDisplay::Name::Person)
+              txt = link_to_value(val.name, buffer.join(' '))
+              txt << " (#{val.roles.join(', ')})" if val.roles
+              sub_parts << txt
+            else
+              sub_parts << link_to_value(val, buffer.join(' '))
+            end
+          elsif @config.link
+            if val.is_a?(ModsDisplay::Name::Person)
+              txt = link_to_value(val.name)
+              txt << " (#{val.roles.join(', ')})" if val.roles
+              sub_parts << txt
+            else
+              sub_parts << link_to_value(val.to_s)
+            end
+          else
+            sub_parts << val.to_s
+          end
+        end
+        subs << sub_parts.join(@config.delimiter)
+      end
+    end
+    output["subjects"] = subs
+    return output
+  end
 
   def process_hierarchicalGeographic(element)
     values_from_subjects(element)
