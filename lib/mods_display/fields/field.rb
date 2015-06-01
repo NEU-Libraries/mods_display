@@ -77,7 +77,7 @@ class ModsDisplay::Field
   end
   
   def sanitized_field(label)
-    '#{label.gsub(/:$/,'').strip}'
+    "#{label.gsub(/:$/,'').strip}"
   end
 
   def replace_tokens(object, value)
