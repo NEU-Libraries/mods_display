@@ -109,7 +109,7 @@ class ModsDisplay::Subject < ModsDisplay::Field
         subs << sub_parts.join(@config.delimiter)
       end
     end
-    output["subjects"] = subs
+    output["#{sanitized_field(field.label)}"] = subs
     return output
   end
 
