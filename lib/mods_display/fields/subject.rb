@@ -74,9 +74,9 @@ class ModsDisplay::Subject < ModsDisplay::Field
   
   def to_hash
     output = Hash.new
+    subs = []
     return nil if fields.empty? or @config.ignore?
     fields.each do |field|
-      subs = []
       field.values.each do |subjects|
         buffer = []
         sub_parts = []
