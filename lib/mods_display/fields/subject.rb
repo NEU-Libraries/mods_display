@@ -73,10 +73,12 @@ class ModsDisplay::Subject < ModsDisplay::Field
   end
   
   def to_hash
+    key_val = ""
     output = Hash.new
     subs = []
     return nil if fields.empty? or @config.ignore?
     fields.each do |field|
+      key_val = "#{sanitized_field(field.label)}"
       field.values.each do |subjects|
         buffer = []
         sub_parts = []
@@ -109,7 +111,7 @@ class ModsDisplay::Subject < ModsDisplay::Field
         subs << sub_parts.join(@config.delimiter)
       end
     end
-    output["#{sanitized_field(field.label)}"] = subs
+    output[key_val] = subs
     return output
   end
 
