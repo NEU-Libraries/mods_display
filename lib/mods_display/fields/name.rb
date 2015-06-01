@@ -36,9 +36,11 @@ class ModsDisplay::Name < ModsDisplay::Field
   
   def to_hash
     return nil if fields.empty? or @config.ignore?
+    key_val = ""
     output = Hash.new
     names = []
     fields.each do |field|
+      key_val = "#{sanitized_field(field.label)}"
       names << field.values.map do |val|
         if @config.link
           txt = link_to_value(val.name)
@@ -49,7 +51,7 @@ class ModsDisplay::Name < ModsDisplay::Field
         end
       end.join(@config.delimiter)
     end
-    output["#{sanitized_field(field.label)}"] = names
+    output[key_val] = names
     return output
   end  
 
