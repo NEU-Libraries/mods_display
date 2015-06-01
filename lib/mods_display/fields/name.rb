@@ -33,6 +33,25 @@ class ModsDisplay::Name < ModsDisplay::Field
     end
     output
   end
+  
+  def to_hash
+    return nil if fields.empty? or @config.ignore?
+    output = Hash.new
+    names = []
+    fields.each do |field|
+      names << field.values.map do |val|
+        if @config.link
+          txt = link_to_value(val.name)
+          txt << " (#{val.roles.join(', ')})" if val.roles
+          txt
+        else
+          val.to_s
+        end
+      end.join(@config.delimiter)
+    end
+    output["names"] = names
+    return output
+  end  
 
   private
 
