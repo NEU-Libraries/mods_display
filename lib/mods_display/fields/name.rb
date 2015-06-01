@@ -49,7 +49,7 @@ class ModsDisplay::Name < ModsDisplay::Field
         end
       end.join(@config.delimiter)
     end
-    output["names"] = names
+    output["#{sanitized_field(field.label)}"] = names
     return output
   end  
 
