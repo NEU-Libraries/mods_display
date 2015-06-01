@@ -22,8 +22,27 @@ class ModsDisplay::Format < ModsDisplay::Field
     end
     collapse_fields(return_fields)
   end
+  
+  def to_hash
+    return nil if fields.blank? or @config.ignore?
+    hsh = Hash.new
+    vals = []
+    if @values.respond_to?(:format) and
+       !@values.format.nil? and
+       !@values.format.empty?
+         vals << raw_formats(@values.format).join(", ")
+    end
+    hsh["#{format_label}"] = vals
+    return hsh
+  end
 
   private
+
+  def raw_formats(formats)
+    formats.map do |format|
+      "#{format}"
+    end
+  end
 
   def decorate_formats(formats)
     formats.map do |format|
