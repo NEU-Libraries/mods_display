@@ -7,7 +7,7 @@ class ModsDisplay::Language < ModsDisplay::Field
             ModsDisplay::Values.new(:label => displayLabel(value) || displayLabel(term) || I18n.t('mods_display.language'), :values => [displayForm(value) || language_codes[term.text]].flatten)
           end
           if term.attributes["type"].respond_to?(:value) and term.attributes["type"].value == "text"
-            ModsDisplay::Values.new(:label => I18n.t('mods_display.language'), :values => [term.text].flatten)
+            ModsDisplay::Values.new(:label => I18n.t('mods_display.language'), :values => [term.text])
           end
         end.flatten.compact
       end
