@@ -43,14 +43,18 @@ class ModsDisplay::HTML
   
   # this isn't an ideal place for this, but will do for now
   def to_json
-    output = Hash.new
-    mods_display_fields.each do |field_key|
-      field = mods_field(@xml, field_key)
-      unless field.nil? or field.to_hash.nil?
-        output.merge!(field.to_hash)
+    begin
+      output = Hash.new
+      mods_display_fields.each do |field_key|
+        field = mods_field(@xml, field_key)
+        unless field.nil? or field.to_hash.nil?
+          output.merge!(field.to_hash)
+        end
       end
+      return output.to_json
+    rescue Exception => error
+      return '[]'
     end
-    return output.to_json
   end
   
   def method_missing(method_name, *args, &block)
