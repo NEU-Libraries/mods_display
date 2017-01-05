@@ -31,14 +31,18 @@ class ModsDisplay::HTML
   end
   
   def to_html
-    output = "<dl>"
-    mods_display_fields.each do |field_key|
-      field = mods_field(@xml, field_key)
-      unless field.nil? or field.to_html.nil?
-        output << field.to_html
+    begin
+      output = "<dl>"
+      mods_display_fields.each do |field_key|
+        field = mods_field(@xml, field_key)
+        unless field.nil? or field.to_html.nil?
+          output << field.to_html
+        end
       end
+      output << "</dl>"
+    rescue Exception => error
+      return ""
     end
-    output << "</dl>"
   end
   
   # this isn't an ideal place for this, but will do for now
