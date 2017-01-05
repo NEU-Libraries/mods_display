@@ -13,8 +13,12 @@ module ModsDisplay::ControllerExtension
   end
 
   def render_mods_display model
-    return "" if model.mods_display_xml.nil?
-    ModsDisplay::HTML.new(mods_display_config, model.mods_display_xml, self)
+    begin
+      return "" if model.mods_display_xml.nil?
+      ModsDisplay::HTML.new(mods_display_config, model.mods_display_xml, self)
+    rescue Exception => error
+      return ""
+    end
   end
 
   private
