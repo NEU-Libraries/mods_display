@@ -17,8 +17,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(spec)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency 'activesupport', '3.2.12'
-  gem.add_dependency 'stanford-mods', '1.1.4'
+  gem.add_dependency 'stanford-mods', '1.1.2'
   gem.add_dependency 'i18n'
 
   gem.add_development_dependency 'rake'
